@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Large datasets and generated artifacts
+data/raw/
+data/generated/
+models/
+results/
+archive/
+
+# Tooling caches / logs
+.ruff_cache/
+unsloth_compiled_cache/
+unsloth_training_checkpoints/
+runs/
+
+# OS / editor
+.DS_Store
+*.swp
