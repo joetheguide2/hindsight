@@ -1,21 +1,63 @@
-# Python
+# ---------- Python / environment ----------
 __pycache__/
 *.py[cod]
 .venv/
 
-# Large datasets and generated artifacts
-data/raw/
-data/generated/
+# ---------- Model weights & training runs (large, redoable) ----------
 models/
-results/
 archive/
-
-# Tooling caches / logs
-.ruff_cache/
+runs/
 unsloth_compiled_cache/
 unsloth_training_checkpoints/
-runs/
+.ruff_cache/
+*.safetensors
+*.pt
+*.pth
+*.bin
+*.gguf
 
-# OS / editor
+# ---------- Data ----------
+# Ignore all raw/intermediate data; keep only the final evaluation set.
+# (cleaned_with_regex.parquet, the 27.5k-sample training corpus, is regenerable
+#  from data/raw via src/data/dataset_creation.py + the regex filter, and is
+#  above GitHub's 100 MB file limit, so it is not tracked.)
+data/*
+!data/generated/
+data/generated/*
+!data/generated/eval_set_final.parquet
+
+# ---------- Results ----------
+# Keep only the Student / StudentF prediction CSVs used for the paper's numbers.
+results/*
+!results/base_and_student_raw/
+!results/studentF_filtered/
+results/base_and_student_raw/*
+results/studentF_filtered/*
+!results/base_and_student_raw/ft_results.csv
+!results/studentF_filtered/ft_results.csv
+
+# ---------- Figures (the paper already contains its figures) ----------
+assets/figures/
+
+# ---------- One-off / superseded / data-inspection scripts (redoable) ----------
+src/main.py
+src/inference.py
+src/training/train.py
+src/training/grposcript.py
+src/training/save_trained_model.py
+src/evaluation/eval_batched.py
+src/evaluation/evaluate_new.py
+src/evaluation/eval_deepseek.py
+src/analysis/pandasyaar.py
+src/analysis/analysis.py
+src/analysis/analysis2.py
+src/analysis/analysis3.py
+src/analysis/plot.py
+src/data/checklen.py
+src/data/concat_all.py
+src/data/jsonput.py
+src/data/merge.py
+
+# ---------- OS / editor ----------
 .DS_Store
 *.swp
